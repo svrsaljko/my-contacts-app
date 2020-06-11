@@ -1,4 +1,9 @@
-namespace Backend
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Backend.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,14 +11,20 @@ namespace Backend
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Contact")]
-    public partial class Contact
+
+    public class ContactModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Contact()
-        {
-            ContactEmail = new HashSet<ContactEmail>();
-            ContactNumber = new HashSet<ContactNumber>();
+   
+
+        public ContactModel(int Id, string FirstName, string LastName, string ContactAddress, string Tag, string Gender, bool Bookmarked) {
+            this.Id = Id;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.ContactAddress = ContactAddress;
+            this.Tag = Tag;
+            this.Gender = Gender;
+            this.Bookmarked = Bookmarked;
+           
         }
 
         public int Id { get; set; }
@@ -40,12 +51,16 @@ namespace Backend
 
         public bool Bookmarked { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContactEmail> ContactEmail { get; set; }
+      
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContactEmailModel> ContactEmails { get; set; }
+
         public virtual ICollection<ContactNumber> ContactNumber { get; set; }
+      
+     
+        
+}
 
-   
-    }
+
+    
 }
