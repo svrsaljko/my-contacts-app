@@ -16,7 +16,10 @@ namespace Backend.Models
     {
    
 
-        public ContactModel(int Id, string FirstName, string LastName, string ContactAddress, string Tag, string Gender, bool Bookmarked) {
+        public ContactModel(int Id, string FirstName, string LastName,
+            string ContactAddress, string Tag,string Gender, bool Bookmarked,
+            IEnumerable<ContactEmailModel> ContactEmails,
+            IEnumerable<ContactNumberModel> ContactNumbers) {
             this.Id = Id;
             this.FirstName = FirstName;
             this.LastName = LastName;
@@ -24,7 +27,8 @@ namespace Backend.Models
             this.Tag = Tag;
             this.Gender = Gender;
             this.Bookmarked = Bookmarked;
-           
+            this.ContactEmails = ContactEmails;
+            this.ContactNumbers = ContactNumbers;
         }
 
         public int Id { get; set; }
@@ -51,11 +55,11 @@ namespace Backend.Models
 
         public bool Bookmarked { get; set; }
 
-      
+        
+        public IEnumerable<ContactEmailModel> ContactEmails { get; set; }
+        public  IEnumerable<ContactNumberModel> ContactNumbers { get; set; }
 
-        public virtual ICollection<ContactEmailModel> ContactEmails { get; set; }
-
-        public virtual ICollection<ContactNumber> ContactNumber { get; set; }
+        
       
      
         
