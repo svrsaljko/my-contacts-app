@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
+
 namespace Backend.Controllers
 {
     public class ContactController : ApiController
@@ -32,7 +33,7 @@ namespace Backend.Controllers
 
 
         [HttpPost]
-        public void CreateNewContact(ReqBodyCreateContact contact)
+        public IHttpActionResult Post(ReqBodyCreateContact contact)
         {
 
             entities.Contact.Add(contact.NewContact);
@@ -50,9 +51,38 @@ namespace Backend.Controllers
                 entities.ContactNumber.Add(cn);
             }
             entities.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest("Not a valid Contact id");
+
+            Contact contact = entities.Contact.Where(c => c.Id == id).FirstOrDefault();
+            if (contact == null)
+            {
+                return BadRequest("Contact doesn't exist");
+            }
+
+            ContactEmail contactEmail = entities.ContactEmail.Where(c => c.ContactId == id).FirstOrDefault();
+            ContactNumber contactNumber = entities.ContactNumber.Where(c => c.ContactId == id).FirstOrDefault();
+
+            entities.ContactEmail.Remove(contactEmail);
+            entities.ContactNumber.Remove(contactNumber);
+            entities.Contact.Remove(contact);
+
+            entities.SaveChanges();
+
+
+            return Ok("Contact successfully deleted!");
         }
     }
 
 
-
 }
+
+
+
+

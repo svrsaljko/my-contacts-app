@@ -19,12 +19,12 @@ namespace Backend.DB_Context
             modelBuilder.Entity<Contact>()
                 .HasMany(e => e.ContactEmail)
                 .WithRequired(e => e.Contact)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Contact>()
                 .HasMany(e => e.ContactNumber)
                 .WithRequired(e => e.Contact)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
         }
     }
 }
