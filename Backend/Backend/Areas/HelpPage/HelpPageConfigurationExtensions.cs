@@ -1,3 +1,5 @@
+using Backend.Areas.HelpPage.ModelDescriptions;
+using Backend.Areas.HelpPage.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,8 +13,6 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Backend.Areas.HelpPage.ModelDescriptions;
-using Backend.Areas.HelpPage.Models;
 
 namespace Backend.Areas.HelpPage
 {

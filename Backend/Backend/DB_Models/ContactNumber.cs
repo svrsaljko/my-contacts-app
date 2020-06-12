@@ -1,10 +1,7 @@
-namespace Backend
+namespace Backend.DB_Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("ContactNumber")]
     public partial class ContactNumber
@@ -16,7 +13,7 @@ namespace Backend
         public string Number { get; set; }
 
         public int ContactId { get; set; }
-       
+
         public virtual Contact Contact { get; set; }
     }
 }

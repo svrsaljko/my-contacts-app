@@ -1,8 +1,8 @@
+using Backend.Areas.HelpPage.ModelDescriptions;
+using Backend.Areas.HelpPage.Models;
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Backend.Areas.HelpPage.ModelDescriptions;
-using Backend.Areas.HelpPage.Models;
 
 namespace Backend.Areas.HelpPage.Controllers
 {

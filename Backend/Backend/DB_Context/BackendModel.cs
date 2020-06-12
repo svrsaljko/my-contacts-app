@@ -1,9 +1,7 @@
-namespace Backend
+namespace Backend.DB_Context
 {
-    using System;
+    using Backend.DB_Models;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
     public partial class BackendModel : DbContext
     {
