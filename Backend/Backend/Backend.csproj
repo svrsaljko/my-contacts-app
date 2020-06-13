@@ -180,6 +180,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ContactNumberModel.cs" />
+    <Compile Include="Models\ReqBodyBookmarkContact.cs" />
     <Compile Include="Models\ReqBodyCreateContact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

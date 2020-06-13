@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-
 namespace Backend.Controllers
 {
     public class ContactController : ApiController
@@ -17,14 +16,17 @@ namespace Backend.Controllers
 
         public IHttpActionResult Get()
         {
-            IEnumerable<ContactModel> contacts = imapper.Map<IEnumerable<Contact>, IEnumerable<ContactModel>>(entities.Contact.ToList());
-            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>, IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
-            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>, IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
+            IEnumerable<ContactModel> contacts = imapper.Map<IEnumerable<Contact>,
+                IEnumerable<ContactModel>>(entities.Contact.ToList());
+            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>,
+                IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
+            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>,
+                IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
 
             foreach (ContactModel c in contacts)
             {
                 c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
-                c.ContactNumbers = contactNumbers.Where(ce => ce.ContactId == c.Id);
+                c.ContactNumbers = contactNumbers.Where(cn => cn.ContactId == c.Id);
             }
 
 
@@ -33,19 +35,19 @@ namespace Backend.Controllers
 
 
         [HttpPost]
-        public IHttpActionResult Post(ReqBodyCreateContact contact)
+        public IHttpActionResult Post(ReqBodyContact reqBodyContact)
         {
-
-            entities.Contact.Add(contact.NewContact);
+            Contact contact = reqBodyContact.NewContact;
+            entities.Contact.Add(contact);
             entities.SaveChanges();
-            int contactId = contact.NewContact.Id;
+            int contactId = contact.Id;
 
-            foreach (ContactEmail ce in contact.NewContactEmails)
+            foreach (ContactEmail ce in reqBodyContact.NewContactEmails)
             {
                 ce.ContactId = contactId;
                 entities.ContactEmail.Add(ce);
             }
-            foreach (ContactNumber cn in contact.NewContactNumbers)
+            foreach (ContactNumber cn in reqBodyContact.NewContactNumbers)
             {
                 cn.ContactId = contactId;
                 entities.ContactNumber.Add(cn);
@@ -78,8 +80,129 @@ namespace Backend.Controllers
 
             return Ok("Contact successfully deleted!");
         }
-    }
 
+        public IHttpActionResult GetByFirstName(string firstName)
+        {
+
+            IEnumerable<ContactModel> contacts = imapper.Map<IEnumerable<Contact>,
+            IEnumerable<ContactModel>>(entities.Contact.Where(c => c.FirstName == firstName).ToList());
+
+            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>,
+                IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
+            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>,
+                IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
+
+            foreach (ContactModel c in contacts)
+            {
+                c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
+                c.ContactNumbers = contactNumbers.Where(ce => ce.ContactId == c.Id);
+            }
+
+            return Ok(contacts);
+        }
+
+
+        public IHttpActionResult GetByLastName(string lastName)
+        {
+
+            IEnumerable<ContactModel> contacts = imapper.Map<IEnumerable<Contact>,
+            IEnumerable<ContactModel>>(entities.Contact.Where(c => c.LastName == lastName).ToList());
+
+            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>,
+                IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
+            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>,
+                IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
+
+            foreach (ContactModel c in contacts)
+            {
+                c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
+                c.ContactNumbers = contactNumbers.Where(ce => ce.ContactId == c.Id);
+            }
+
+            return Ok(contacts);
+        }
+
+
+        public IHttpActionResult GetByTag(string tag)
+        {
+
+            IEnumerable<ContactModel> contacts = imapper.Map<IEnumerable<Contact>,
+            IEnumerable<ContactModel>>(entities.Contact.Where(c => c.Tag == tag).ToList());
+
+            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>, IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
+            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>, IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
+
+            foreach (ContactModel c in contacts)
+            {
+                c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
+                c.ContactNumbers = contactNumbers.Where(ce => ce.ContactId == c.Id);
+            }
+
+            return Ok(contacts);
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateContact(ReqBodyContact reqBodyContact)
+        {
+
+            int id = reqBodyContact.NewContact.Id;
+            IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
+            IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
+
+
+            Contact contactUpdate = entities.Contact.FirstOrDefault(c => c.Id == id);
+            contactUpdate.FirstName = reqBodyContact.NewContact.FirstName;
+            contactUpdate.LastName = reqBodyContact.NewContact.LastName;
+            contactUpdate.ContactAddress = reqBodyContact.NewContact.ContactAddress;
+            contactUpdate.Tag = reqBodyContact.NewContact.Tag;
+            contactUpdate.Gender = reqBodyContact.NewContact.Gender;
+            contactUpdate.Bookmarked = reqBodyContact.NewContact.Bookmarked;
+
+            IEnumerable<ContactEmail> contactEmailsUpdate = entities.ContactEmail.
+                Where(ce => ce.ContactId == id);
+            foreach (ContactEmail ceu in contactEmailsUpdate)
+            {
+                foreach (ContactEmail ce in contactEmails)
+                {
+                    if (ceu.Id == ce.Id)
+                    {
+                        ceu.Email = ce.Email;
+                    }
+                }
+            }
+
+            IEnumerable<ContactNumber> contactNumbersUpdate = entities.ContactNumber.
+            Where(cn => cn.ContactId == id);
+            foreach (ContactNumber cnu in contactNumbersUpdate)
+            {
+                foreach (ContactNumber cn in contactNumbers)
+                {
+                    if (cnu.Id == cn.Id)
+                    {
+                        cnu.Number = cn.Number;
+                    }
+                }
+            }
+
+            entities.SaveChanges();
+
+            return Ok();
+
+        }
+
+        [HttpPatch]
+        public IHttpActionResult PatchBookmark(ReqBodyBookmarkContact reqBodyBookmarkContact)
+        {
+            int id = reqBodyBookmarkContact.Id;
+            bool bookmarked = reqBodyBookmarkContact.Bookmarked;
+            Contact contact = entities.Contact.FirstOrDefault(c => c.Id == id);
+            contact.Bookmarked = bookmarked;
+
+            entities.SaveChanges();
+
+            return Ok();
+        }
+    }
 
 }
 
