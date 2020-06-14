@@ -1,0 +1,60 @@
+.centerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.centerContainer2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactsContainer {
+  margin-top: 8rem;
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+}
+
+.contactContainer {
+  border: 3px solid orange;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.avatarAndBookmarkedContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.star {
+  height: 100px;
+  width: 100px;
+}
+.avatarContainer {
+  margin: 1rem;
+}
+.bookmarkedContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+.contactDetailsContainer {
+  border-left: 3px solid orange;
+}
+
+.firstNameContainer {
+  margin: 1rem;
+}
+
+h5 {
+  color: orange;
+}
+h4 {
+  color: purple;
+}

@@ -1,1 +1,67 @@
-<p>center-container works!</p>
+<div class="centerContainer">
+  <div class="centerContainer2">
+    <div class="contactsContainer">
+      Contacts:
+      <div *ngIf="contacts">
+        <div class="contactContainer" *ngFor="let contact of contacts">
+          <div class="avatarAndBookmarkedContainer">
+            <div class="avatarContainer">
+              <div
+                *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"
+              ></div>
+              <ng-template #thenBlock>
+                <img
+                  class="avatar"
+                  src="../../../assets/images/maleAvatar.jpg"
+                  alt=""
+                />
+              </ng-template>
+              <ng-template #elseBlock>
+                <img
+                  class="avatar"
+                  src="../../../assets/images/femaleAvatar.png"
+                  alt=""
+                />
+              </ng-template>
+            </div>
+            <div class="bookmarkedContainer">
+              <div
+                *ngIf="contact.Bookmarked; then thenBlock2; else elseBlock2"
+              ></div>
+              <ng-template #thenBlock2>
+                <fa-icon
+                  class=""
+                  [icon]="faStar"
+                  size="3x"
+                  [styles]="{ stroke: 'red', color: 'purple' }"
+                ></fa-icon>
+              </ng-template>
+              <ng-template #elseBlock2>
+                <fa-icon
+                  class=""
+                  [icon]="faStar"
+                  size="3x"
+                  [styles]="{ stroke: 'purple', color: 'red' }"
+                ></fa-icon>
+              </ng-template>
+            </div>
+          </div>
+          <div class="contactDetailsContainer">
+            <div class="firstNameContainer">
+              <h5>First name:</h5>
+              <h4>
+                {{ contact.FirstName }}
+              </h4>
+            </div>
+            <div class="firstNameContainer">
+              <h5>Last name:</h5>
+              <h4>
+                {{ contact.LastName }}
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

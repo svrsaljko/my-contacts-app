@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
+import { IContact } from 'src/app/interfaces/icontact';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-center-container',
@@ -8,8 +10,8 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class CenterContainerComponent implements OnInit {
   constructor(private http: HttpService) {}
-
-  contacts: object;
+  faStar = faStar;
+  contacts: IContact[];
 
   ngOnInit(): void {
     this.http.getAllContacts().subscribe((data) => {
