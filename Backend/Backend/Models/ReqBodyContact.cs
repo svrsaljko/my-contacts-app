@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Backend.Models
 {
-    public class ReqBodyCreateContact
+    public class ReqBodyContact
     {
         public Contact NewContact { get; set; }
         public List<ContactEmail> NewContactEmails { get; set; }

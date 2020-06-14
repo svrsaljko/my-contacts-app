@@ -191,10 +191,10 @@ namespace Backend.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult PatchBookmark(ReqBodyBookmarkContact reqBodyBookmarkContact)
+        public IHttpActionResult PatchBookmarked(ReqBodyBookmarkedContact reqBodyBookmarkedContact)
         {
-            int id = reqBodyBookmarkContact.Id;
-            bool bookmarked = reqBodyBookmarkContact.Bookmarked;
+            int id = reqBodyBookmarkedContact.Id;
+            bool bookmarked = reqBodyBookmarkedContact.Bookmarked;
             Contact contact = entities.Contact.FirstOrDefault(c => c.Id == id);
             contact.Bookmarked = bookmarked;
 

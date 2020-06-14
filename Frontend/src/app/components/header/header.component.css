@@ -1,0 +1,11 @@
+.title {
+  color: orange;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.headerContainer {
+  border-bottom: 3px solid orange;
+}
