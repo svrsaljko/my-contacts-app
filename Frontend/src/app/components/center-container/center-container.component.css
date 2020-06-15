@@ -1,60 +1,67 @@
-.centerContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.centerContainer2 {
+.center-container {
   display: flex;
   flex-direction: column;
 }
 
-.contactsContainer {
-  margin-top: 8rem;
+.columns-container {
+  background-color: #4ec796;
+  color: white;
+  position: fixed;
+  width: 100%;
+  margin-top: 4.3rem;
 }
-
-.avatar {
-  height: 100px;
-  width: 100px;
-}
-
-.contactContainer {
-  border: 3px solid orange;
-  margin-top: 5rem;
+.columns-title-container {
   display: flex;
   flex-direction: row;
+  padding-left: 8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
-.avatarAndBookmarkedContainer {
+.column {
+  width: 14%;
+  font-size: 1.5rem;
+}
+
+.contacts-container {
+  margin-top: 6.8rem;
   display: flex;
   flex-direction: column;
 }
 
-.star {
-  height: 100px;
-  width: 100px;
-}
-.avatarContainer {
-  margin: 1rem;
-}
-.bookmarkedContainer {
+.contact-container {
+  padding-top: 0.7rem;
+  padding-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin: 1rem;
 }
 
-.contactDetailsContainer {
-  border-left: 3px solid orange;
+.contact-details-container {
+  width: 100%;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: row;
 }
 
-.firstNameContainer {
-  margin: 1rem;
+.contact {
+  width: 14%;
 }
 
-h5 {
-  color: orange;
+.contact > p {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  color: gray;
 }
-h4 {
-  color: purple;
+
+.avatar-container {
+  margin-left: 2rem;
+}
+
+.avatar-image {
+  height: 4rem;
+  width: 4rem;
+}
+
+.star-container {
+  margin-top: 1rem;
 }

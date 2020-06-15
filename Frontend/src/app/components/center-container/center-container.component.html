@@ -1,63 +1,107 @@
-<div class="centerContainer">
-  <div class="centerContainer2">
-    <div class="contactsContainer">
-      Contacts:
-      <div *ngIf="contacts">
-        <div class="contactContainer" *ngFor="let contact of contacts">
-          <div class="avatarAndBookmarkedContainer">
-            <div class="avatarContainer">
-              <div
-                *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"
-              ></div>
-              <ng-template #thenBlock>
-                <img
-                  class="avatar"
-                  src="../../../assets/images/maleAvatar.jpg"
-                  alt=""
-                />
-              </ng-template>
-              <ng-template #elseBlock>
-                <img
-                  class="avatar"
-                  src="../../../assets/images/femaleAvatar.png"
-                  alt=""
-                />
-              </ng-template>
-            </div>
-            <div class="bookmarkedContainer">
-              <div
-                *ngIf="contact.Bookmarked; then thenBlock2; else elseBlock2"
-              ></div>
-              <ng-template #thenBlock2>
-                <fa-icon
-                  class=""
-                  [icon]="faStar"
-                  size="3x"
-                  [styles]="{ stroke: 'red', color: 'purple' }"
-                ></fa-icon>
-              </ng-template>
-              <ng-template #elseBlock2>
-                <fa-icon
-                  class=""
-                  [icon]="faStar"
-                  size="3x"
-                  [styles]="{ stroke: 'purple', color: 'red' }"
-                ></fa-icon>
-              </ng-template>
-            </div>
+<div class="center-container">
+  <div class="columns-container">
+    <div class="columns-title-container">
+      <div class="column">
+        <h5>
+          FIRST NAME
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          LAST NAME
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          EMAIL
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          NUMBER
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          ADRESS
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          TAG
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="contacts">
+    <div class="contacts-container">
+      <div *ngFor="let contact of contacts; let i = index">
+        <div
+          [ngStyle]="{ 'background-color': i % 2 == 1 ? 'white' : '#e2ffdb' }"
+          class="contact-container"
+        >
+          <div class="avatar-container">
+            <div
+              *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"
+            ></div>
+            <ng-template #thenBlock>
+              <img
+                class="avatar-image"
+                src="../../../assets/images/maleAvatar.png"
+                alt=""
+              />
+            </ng-template>
+            <ng-template #elseBlock>
+              <img
+                class="avatar-image"
+                src="../../../assets/images/femaleAvatar.png"
+                alt=""
+              />
+            </ng-template>
           </div>
-          <div class="contactDetailsContainer">
-            <div class="firstNameContainer">
-              <h5>First name:</h5>
-              <h4>
+          <div class="contact-details-container">
+            <div class="contact">
+              <p>
                 {{ contact.FirstName }}
-              </h4>
+              </p>
             </div>
-            <div class="firstNameContainer">
-              <h5>Last name:</h5>
-              <h4>
+            <div class="contact">
+              <p>
                 {{ contact.LastName }}
-              </h4>
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                {{ contact.ContactEmails[0].Email }}
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                {{ contact.ContactNumbers[0].Number }}
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                {{ contact.ContactAddress }}
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                {{ contact.Tag }}
+              </p>
+            </div>
+            <div class="contact">
+              <div class="star-container">
+                <fa-icon
+                  class=""
+                  [icon]="faStar"
+                  size="2x"
+                  [ngStyle]="{
+                    color: contact.Bookmarked ? '#638fff' : '#e2ffdb'
+                  }"
+                ></fa-icon>
+              </div>
             </div>
           </div>
         </div>
