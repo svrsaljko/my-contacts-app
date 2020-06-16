@@ -1,0 +1,42 @@
+.contact-container {
+  padding-top: 0.7rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 2px solid #e2ffdb;
+}
+
+.contact-container:hover {
+  cursor: pointer;
+  background-color: #e2ffdb;
+}
+
+.contact-details-container {
+  width: 100%;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.contact {
+  width: 14%;
+}
+
+.contact > p {
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  color: gray;
+}
+
+.avatar-container {
+  margin-left: 2rem;
+}
+
+.avatar-image {
+  height: 4rem;
+  width: 4rem;
+}
+
+.star-container {
+  margin-top: 1rem;
+}

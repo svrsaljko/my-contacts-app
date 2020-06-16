@@ -1,0 +1,30 @@
+.contacts-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-container {
+  background-color: #4ec796;
+  color: white;
+  position: fixed;
+  width: 100%;
+  margin-top: 4.3rem;
+}
+.columns-title-container {
+  display: flex;
+  flex-direction: row;
+  padding-left: 8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.column {
+  width: 14%;
+  font-size: 1.5rem;
+}
+
+.contacts-container {
+  margin-top: 6.8rem;
+  display: flex;
+  flex-direction: column;
+}

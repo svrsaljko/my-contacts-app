@@ -1,0 +1,64 @@
+<div class="contact-container" (click)="onContactClick()">
+  <div class="avatar-container">
+    <div *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"></div>
+    <ng-template #thenBlock>
+      <img
+        class="avatar-image"
+        src="../../../assets/images/maleAvatar.png"
+        alt=""
+      />
+    </ng-template>
+    <ng-template #elseBlock>
+      <img
+        class="avatar-image"
+        src="../../../assets/images/femaleAvatar.png"
+        alt=""
+      />
+    </ng-template>
+  </div>
+  <div class="contact-details-container">
+    <div class="contact">
+      <p>
+        {{ contact.FirstName }}
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        {{ contact.LastName }}
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        {{ contact.ContactEmails[0].Email }}
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        {{ contact.ContactNumbers[0].Number }}
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        {{ contact.ContactAddress }}
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        {{ contact.Tag }}
+      </p>
+    </div>
+    <div class="contact">
+      <div class="star-container">
+        <fa-icon
+          class=""
+          [icon]="faStar"
+          size="2x"
+          [ngStyle]="{
+            color: contact.Bookmarked ? '#638fff' : 'white',
+            display: contact.Bookmarked ? 'block' : 'none'
+          }"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="contacts-list-container">
+  <div class="columns-container">
+    <div class="columns-title-container">
+      <div class="column">
+        <h5>
+          FIRST NAME
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          LAST NAME
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          EMAIL
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          NUMBER
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          ADRESS
+        </h5>
+      </div>
+      <div class="column">
+        <h5>
+          TAG
+        </h5>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="contacts">
+    <div class="contacts-container">
+      <div *ngFor="let contact of contacts; let i = index">
+        <app-contact
+          [routerLink]="['/contact', contact.Id]"
+          [contact]="contact"
+        ></app-contact>
+      </div>
+    </div>
+  </div>
+</div>
