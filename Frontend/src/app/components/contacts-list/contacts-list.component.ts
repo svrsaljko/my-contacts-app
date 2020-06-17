@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { IContact } from 'src/app/interfaces/icontact';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import * as ContactActions from '../../actions/contact.action';
+
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../../app.state';
 
 @Component({
   selector: 'app-contacts-list',
@@ -9,14 +14,17 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./contacts-list.component.css'],
 })
 export class ContactsListComponent implements OnInit {
-  constructor(private http: HttpService) {}
+  contacts$: Observable<IContact[]>;
+  contacts;
+
+  constructor(private http: HttpService, private store: Store<any>) {}
   faStar = faStar;
-  contacts: IContact[];
 
   ngOnInit(): void {
-    this.http.getAllContacts().subscribe((data) => {
-      this.contacts = data;
-      console.log('this.contacts: ', this.contacts);
+    this.store.dispatch(new ContactActions.SetAllContacts());
+    this.store.subscribe((state) => {
+      console.log('state.contact', state.contact.payload);
+      this.contacts = state.contact.payload;
     });
   }
 }

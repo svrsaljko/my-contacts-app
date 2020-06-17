@@ -33,15 +33,12 @@
       </div>
     </div>
   </div>
-
-  <div *ngIf="contacts">
-    <div class="contacts-container">
-      <div *ngFor="let contact of contacts; let i = index">
-        <app-contact
-          [routerLink]="['/contact', contact.Id]"
-          [contact]="contact"
-        ></app-contact>
-      </div>
+  <div class="contacts-container">
+    <div *ngFor="let contact of contacts">
+      <app-contact
+        [routerLink]="['/contact', contact.Id]"
+        [contact]="contact"
+      ></app-contact>
     </div>
   </div>
 </div>
