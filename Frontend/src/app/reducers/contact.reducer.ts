@@ -42,6 +42,28 @@ export function reducer(
         loaded: false,
         error: action.payload,
       };
+
+    case ContactActions.ContactActionTypes.SET_ALL_CONTACTS_BY_PAYLOAD:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ContactActions.ContactActionTypes.SET_ALL_CONTACTS_BY_PAYLOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        contacts: action.payload,
+      };
+    case ContactActions.ContactActionTypes.SET_ALL_CONTACTS_FAIL:
+      return {
+        ...state,
+        contacts: [],
+        loading: false,
+        loaded: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }
