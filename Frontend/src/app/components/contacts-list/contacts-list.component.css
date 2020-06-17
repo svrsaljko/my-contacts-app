@@ -8,7 +8,7 @@
   color: white;
   position: fixed;
   width: 100%;
-  margin-top: 4.3rem;
+  margin-top: 8.2rem;
 }
 .columns-title-container {
   display: flex;
@@ -24,7 +24,7 @@
 }
 
 .contacts-container {
-  margin-top: 6.8rem;
+  margin-top: 10.7rem;
   display: flex;
   flex-direction: column;
 }

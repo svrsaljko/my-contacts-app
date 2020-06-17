@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { ContactDetailsComponent } from './components/contact-details/contact-de
 import { ContactsListComponent } from './components/contacts-list/contacts-list.component';
 import { ContactEffectService } from '../app/services/contact.effect';
 import { reducer } from './reducers/contact.reducer';
+import { ContactManagerBarComponent } from './components/contact-manager-bar/contact-manager-bar.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { reducer } from './reducers/contact.reducer';
     ContactComponent,
     ContactDetailsComponent,
     ContactsListComponent,
+    ContactManagerBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { reducer } from './reducers/contact.reducer';
       contacts: reducer,
     }),
     EffectsModule.forRoot([ContactEffectService]),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

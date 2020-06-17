@@ -1,0 +1,47 @@
+<div class="contact-manager-bar-container">
+  <div class="contact-manager-bar-items">
+    <button (click)="onAddNewClick()" class="button">
+      ADD NEW
+      <fa-icon [icon]="faPlusSquare" size="1x"></fa-icon>
+    </button>
+
+    <button (click)="onGetAllClick()" class="button">
+      GET ALL
+      <fa-icon [icon]="faUser" size="1x"></fa-icon>
+    </button>
+    <button (click)="onByFirstNameClick()" class="button">
+      BY FIRST NAME
+      <fa-icon
+        class=""
+        [icon]="faSearch"
+        size="1x"
+        [ngStyle]="{
+          color: 'white'
+        }"
+      ></fa-icon>
+    </button>
+    <button (click)="onByLastNameClick()" class="button">
+      BY LAST NAME
+      <fa-icon
+        class=""
+        [icon]="faSearch"
+        size="1x"
+        [ngStyle]="{
+          color: 'white'
+        }"
+      ></fa-icon>
+    </button>
+    <button (click)="onByTagClick()" class="button">
+      BY TAG
+      <fa-icon
+        class=""
+        [icon]="faSearch"
+        size="1x"
+        [ngStyle]="{
+          color: 'white'
+        }"
+      ></fa-icon>
+    </button>
+    <input type="text" [formControl]="keywordForm" />
+  </div>
+</div>

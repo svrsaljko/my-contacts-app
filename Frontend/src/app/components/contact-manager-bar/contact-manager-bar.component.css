@@ -1,0 +1,33 @@
+.contact-manager-bar-container {
+  background-color: #5affe1;
+  width: 100%;
+  position: fixed;
+  margin-top: 4.3rem;
+  color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.contact-manager-bar-items {
+  margin-left: 8rem;
+  margin-right: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  color: white;
+  background-color: #4ec796;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-style: normal;
+  width: 9%;
+}
+
+.button:hover {
+  background-color: #638fff;
+  cursor: pointer;
+}
