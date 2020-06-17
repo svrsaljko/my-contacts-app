@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from 'src/app/services/http.service';
-import { IContact } from 'src/app/interfaces/icontact';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import * as ContactActions from '../../actions/contact.action';
-
-import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AppState } from '../../app.state';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+
+import { IContact } from 'src/app/interfaces/icontact';
+import * as ContactActions from '../../actions/contact.action';
+import * as ContactReducers from '../../reducers/contact.reducer';
+import { IAppState } from '../../iapp.state';
 
 @Component({
   selector: 'app-contacts-list',
@@ -15,16 +15,12 @@ import { AppState } from '../../app.state';
 })
 export class ContactsListComponent implements OnInit {
   contacts$: Observable<IContact[]>;
-  contacts;
 
-  constructor(private http: HttpService, private store: Store<any>) {}
+  constructor(private store: Store<IAppState>) {}
   faStar = faStar;
 
   ngOnInit(): void {
     this.store.dispatch(new ContactActions.SetAllContacts());
-    this.store.subscribe((state) => {
-      console.log('state.contact', state.contact.payload);
-      this.contacts = state.contact.payload;
-    });
+    this.contacts$ = this.store.pipe(select(ContactReducers.getContacts));
   }
 }

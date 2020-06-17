@@ -32,7 +32,7 @@ import { reducer } from './reducers/contact.reducer';
     FontAwesomeModule,
     StoreDevtoolsModule.instrument(),
     StoreModule.forRoot({
-      contact: reducer,
+      contacts: reducer,
     }),
     EffectsModule.forRoot([ContactEffectService]),
   ],
