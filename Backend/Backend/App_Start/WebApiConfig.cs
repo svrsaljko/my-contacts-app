@@ -7,11 +7,9 @@ namespace Backend
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-            var corsAttr = new EnableCorsAttribute("http://localhost:4200", "Access - Control - Allow - Origin", "*");
-            config.EnableCors(corsAttr);
-       
-            // Web API routes
+            
+            config.EnableCors();
+    
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

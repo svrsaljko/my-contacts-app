@@ -2,6 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { IContact } from '../interfaces/icontact';
 import * as ContactActions from '../actions/contact.action';
+import { IAppState } from '../iapp.state';
 
 export interface IContactsState {
   contacts: IContact[];
@@ -89,3 +90,14 @@ export const getError = createSelector(
   getContactFeatureState,
   (state: IContactsState) => state.error
 );
+
+export const selectContacts = (state: IAppState) => state.contacts.contacts;
+
+export const getContactById = (id: number) =>
+  createSelector(selectContacts, (allContacts) => {
+    if (allContacts) {
+      return allContacts.find((contact) => contact.Id === id);
+    } else {
+      return null;
+    }
+  });

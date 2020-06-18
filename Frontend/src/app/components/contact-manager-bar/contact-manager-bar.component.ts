@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +15,9 @@ import * as ContactActions from '../../actions/contact.action';
   styleUrls: ['./contact-manager-bar.component.css'],
 })
 export class ContactManagerBarComponent implements OnInit {
-  constructor(private store: Store<IAppState>) {}
+  constructor(private router: Router, private store: Store<IAppState>) {}
+
+  ROUT = 'contact/list';
 
   faPlusSquare = faPlusSquare;
   faSearch = faSearch;
@@ -24,21 +27,34 @@ export class ContactManagerBarComponent implements OnInit {
   keywordForm = new FormControl('');
 
   onByFirstNameClick = () => {
+    if (this.router.url !== `/${this.ROUT}`) {
+      this.router.navigate([this.ROUT]);
+    }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
     );
   };
   onByLastNameClick = () => {
+    if (this.router.url !== `/${this.ROUT}`) {
+      this.router.navigate([this.ROUT]);
+    }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
     );
   };
   onByTagClick = () => {
+    if (this.router.url !== `/${this.ROUT}`) {
+      this.router.navigate([this.ROUT]);
+    }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
     );
   };
   onGetAllClick = () => {
+    console.log('this.router: ', this.router.url);
+    if (this.router.url !== `/${this.ROUT}`) {
+      this.router.navigate([this.ROUT]);
+    }
     this.store.dispatch(new ContactActions.SetAllContacts());
   };
   onAddNewClick = () => {};

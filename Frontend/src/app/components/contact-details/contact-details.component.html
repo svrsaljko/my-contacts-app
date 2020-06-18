@@ -1,1 +1,100 @@
-<p>contact-details works!</p>
+<div
+  class="contact-details-component-container"
+  *ngIf="contact$ | async as contact"
+>
+  <div class="contact-details-container">
+    <div class="avatar-and-main-details-container">
+      <div class="avatar-container">
+        <div
+          *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"
+        ></div>
+        <ng-template #thenBlock>
+          <img
+            class="avatar-image"
+            src="../../../assets/images/maleAvatar.png"
+            alt=""
+          />
+        </ng-template>
+        <ng-template #elseBlock>
+          <img
+            class="avatar-image"
+            src="../../../assets/images/femaleAvatar.png"
+            alt=""
+          />
+        </ng-template>
+      </div>
+      <div class="main-details-and-options-container">
+        <div class="edit-bookmark-delete-options-container">
+          <div class="edit-bookmark-options-container">
+            <button
+              (click)="updateBookmarkedOnClick(contactId, !contact.Bookmarked)"
+              [ngStyle]="{
+                color: 'white',
+                backgroundColor: contact.Bookmarked ? '#638fff' : '#4ec796',
+                border: 'none',
+                padding: '0.5rem',
+                borderRadius: '1rem',
+                marginRight: '1rem'
+              }"
+              class="button-bookmarked"
+            >
+              <fa-icon [icon]="faStar" size="2x"></fa-icon>
+            </button>
+            <button class="button">
+              <fa-icon [icon]="faEdit" size="2x"></fa-icon>
+            </button>
+          </div>
+          <button class="button">
+            <fa-icon [icon]="faTimesCircle" size="2x"></fa-icon>
+          </button>
+        </div>
+        <div class="main-details-container">
+          <p class="main-details-container-property">
+            First name:
+          </p>
+          <p class="main-details-container-property-value">
+            {{ contact.FirstName }}
+          </p>
+          <p class="main-details-container-property">
+            Last name:
+          </p>
+          <p class="main-details-container-property-value">
+            {{ contact.LastName }}
+          </p>
+          <p class="main-details-container-property">
+            Address
+          </p>
+          <p class="main-details-container-property-value">
+            {{ contact.ContactAddress }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tag-emails-numbers-container">
+      <p class="main-details-container-property">
+        Tag:
+      </p>
+      <p class="main-details-container-property-value">
+        {{ contact.Tag }}
+      </p>
+
+      <p class="main-details-container-property">
+        Email:
+      </p>
+      <div *ngFor="let email of contact.ContactEmails">
+        <p class="main-details-container-property-value">
+          {{ email.Email }}
+        </p>
+      </div>
+      <p class="main-details-container-property">
+        Number:
+      </p>
+      <div *ngFor="let number of contact.ContactNumbers">
+        <p class="main-details-container-property-value">
+          {{ number.Number }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

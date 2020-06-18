@@ -6,10 +6,11 @@ using Backend.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-
+using System.Web.Http.Cors;
 
 namespace Backend.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
 
     public class ContactController : ApiController
     {
@@ -202,7 +203,7 @@ namespace Backend.Controllers
 
             entities.SaveChanges();
 
-            return Ok();
+            return Ok(contact);
         }
     }
 
