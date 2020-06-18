@@ -11,9 +11,8 @@ using System.Web.Http.Cors;
 namespace Backend.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-
     public class ContactController : ApiController
-    {
+        {
         private readonly BackendModel entities = new BackendModel();
         private readonly IMapper imapper = new AutoMapperConfig().Configure();
 
@@ -152,6 +151,12 @@ namespace Backend.Controllers
             IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
             IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
 
+        
+            entities.ContactEmail.RemoveRange(entities.ContactEmail.Where(ce => ce.ContactId == id));
+            entities.ContactNumber.RemoveRange(entities.ContactNumber.Where(cn => cn.ContactId == id));
+
+
+            entities.SaveChanges();
 
             Contact contactUpdate = entities.Contact.FirstOrDefault(c => c.Id == id);
             contactUpdate.FirstName = reqBodyContact.NewContact.FirstName;
@@ -161,30 +166,13 @@ namespace Backend.Controllers
             contactUpdate.Gender = reqBodyContact.NewContact.Gender;
             contactUpdate.Bookmarked = reqBodyContact.NewContact.Bookmarked;
 
-            IEnumerable<ContactEmail> contactEmailsUpdate = entities.ContactEmail.
-                Where(ce => ce.ContactId == id);
-            foreach (ContactEmail ceu in contactEmailsUpdate)
+            foreach (ContactEmail ce in contactEmails)
             {
-                foreach (ContactEmail ce in contactEmails)
-                {
-                    if (ceu.Id == ce.Id)
-                    {
-                        ceu.Email = ce.Email;
-                    }
-                }
+                entities.ContactEmail.Add(ce);
             }
-
-            IEnumerable<ContactNumber> contactNumbersUpdate = entities.ContactNumber.
-            Where(cn => cn.ContactId == id);
-            foreach (ContactNumber cnu in contactNumbersUpdate)
+            foreach (ContactNumber cn in contactNumbers)
             {
-                foreach (ContactNumber cn in contactNumbers)
-                {
-                    if (cnu.Id == cn.Id)
-                    {
-                        cnu.Number = cn.Number;
-                    }
-                }
+                entities.ContactNumber.Add(cn);
             }
 
             entities.SaveChanges();
@@ -194,8 +182,9 @@ namespace Backend.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult PatchBookmarked(ReqBodyBookmarkedContact reqBodyBookmarkedContact)
+        public IHttpActionResult PatchBookmarked([FromBody] ReqBodyBookmarkedContact reqBodyBookmarkedContact)
         {
+
             int id = reqBodyBookmarkedContact.Id;
             bool bookmarked = reqBodyBookmarkedContact.Bookmarked;
             Contact contact = entities.Contact.FirstOrDefault(c => c.Id == id);
@@ -203,7 +192,7 @@ namespace Backend.Controllers
 
             entities.SaveChanges();
 
-            return Ok(contact);
+            return Ok();
         }
     }
 

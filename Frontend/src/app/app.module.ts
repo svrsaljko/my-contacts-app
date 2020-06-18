@@ -17,6 +17,7 @@ import { ContactsListComponent } from './components/contacts-list/contacts-list.
 import { ContactEffectService } from '../app/services/contact.effect';
 import { reducer } from './reducers/contact.reducer';
 import { ContactManagerBarComponent } from './components/contact-manager-bar/contact-manager-bar.component';
+import { ContactUpdateFormComponent } from './components/contact-update-form/contact-update-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ContactManagerBarComponent } from './components/contact-manager-bar/con
     ContactDetailsComponent,
     ContactsListComponent,
     ContactManagerBarComponent,
+    ContactUpdateFormComponent,
   ],
   imports: [
     BrowserModule,

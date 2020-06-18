@@ -1,0 +1,178 @@
+<div
+  class="contact-update-form-component-container"
+  *ngIf="contact$ | async as contact"
+>
+  <div class="contact-update-form-container">
+    <div class="contact-avatar-and-update-details-container">
+      <div class="avatar-container">
+        <div
+          *ngIf="contact.Gender == 'Male'; then thenBlock; else elseBlock"
+        ></div>
+        <ng-template #thenBlock>
+          <img
+            class="avatar-image"
+            src="../../../assets/images/maleAvatar.png"
+            alt=""
+          />
+        </ng-template>
+        <ng-template #elseBlock>
+          <img
+            class="avatar-image"
+            src="../../../assets/images/femaleAvatar.png"
+            alt=""
+          />
+        </ng-template>
+      </div>
+      <div class="contact-update-main-details-container">
+        <form [formGroup]="contactUpdateMainDetailsForm">
+          <label>
+            First name:
+            <input
+              type="text"
+              formControlName="firstName"
+              [ngModel]="contact.FirstName"
+            />
+          </label>
+          <label>
+            Last name:
+            <input
+              type="text"
+              formControlName="lastName"
+              [ngModel]="contact.LastName"
+            />
+          </label>
+          <label>
+            Address:
+            <input
+              type="text"
+              formControlName="address"
+              [ngModel]="contact.ContactAddress"
+            />
+          </label>
+          <label>
+            Tag:
+            <input type="text" formControlName="tag" [ngModel]="contact.Tag" />
+          </label>
+        </form>
+        <div class="button-container">
+          <button
+            [disabled]="!contactUpdateMainDetailsForm.valid"
+            (click)="submitUpdate(contact.Gender, contact.Bookmarked)"
+          >
+            UPDATE CONTACT
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="contact-update-email-container">
+      <form [formGroup]="contactAddEmailForm">
+        <label>
+          Add new email:
+          <input
+            type="text"
+            formControlName="addEmail"
+            placeholder="Enter new email here ..."
+          />
+        </label>
+      </form>
+      <div class="button-container">
+        <button (click)="addEmailFromEmailForm()">ADD EMAIL</button>
+      </div>
+      <div class="message-container">
+        <div class="message">
+          Click on email you want to keep!
+        </div>
+      </div>
+
+      <div
+        class="email-container"
+        *ngFor="let email of contact.ContactEmails; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: addingEmailChecker(i) ? '#638fff' : '#5affe1',
+            color: addingEmailChecker(i) ? 'white' : '#638fff'
+          }"
+          (click)="addEmail(email.Email, i)"
+        >
+          {{ email.Email }}
+        </div>
+      </div>
+      <div class="message">
+        New emails added:
+      </div>
+      <div
+        class="email-container"
+        *ngFor="let email of contactFormEmails; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: '#638fff',
+            color: 'white'
+          }"
+        >
+          {{ email.addEmail }}
+        </div>
+      </div>
+    </div>
+    <div class="contact-update-number-container">
+      <form [formGroup]="contactAddNumberForm">
+        <label>
+          Add new contact number:
+          <input
+            type="text"
+            formControlName="addNumber"
+            placeholder="Enter new number here ..."
+          />
+        </label>
+      </form>
+      <div class="button-container">
+        <button (click)="addNumberFromNumberForm()">
+          ADD NUMBER
+        </button>
+      </div>
+      <div class="message-container">
+        <div class="message">
+          Click on number you want to keep!
+        </div>
+      </div>
+
+      <div
+        class="email-container"
+        *ngFor="let contactNumber of contact.ContactNumbers; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: addingNumberChecker(i) ? '#638fff' : '#5affe1',
+            color: addingNumberChecker(i) ? 'white' : '#638fff'
+          }"
+          (click)="addNumber(contactNumber.Number, i)"
+        >
+          {{ contactNumber.Number }}
+        </div>
+      </div>
+      <div class="message-container">
+        <div class="message">
+          New numbers added:
+        </div>
+      </div>
+      <div
+        class="email-container"
+        *ngFor="let contactNumber of contactFormNumbers; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: '#638fff',
+            color: 'white'
+          }"
+        >
+          {{ contactNumber.addNumber }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

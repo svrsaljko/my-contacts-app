@@ -40,11 +40,14 @@
             >
               <fa-icon [icon]="faStar" size="2x"></fa-icon>
             </button>
-            <button class="button">
+            <button
+              (click)="openUpdateContactFormOnClick(contactId)"
+              class="button"
+            >
               <fa-icon [icon]="faEdit" size="2x"></fa-icon>
             </button>
           </div>
-          <button class="button">
+          <button (click)="deleteContactOnClick(contactId)" class="button">
             <fa-icon [icon]="faTimesCircle" size="2x"></fa-icon>
           </button>
         </div>

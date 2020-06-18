@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace Backend
 {
@@ -7,9 +6,8 @@ namespace Backend
     {
         public static void Register(HttpConfiguration config)
         {
-            
-            config.EnableCors();
-    
+
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -17,6 +15,9 @@ namespace Backend
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.EnableCors();
+
         }
     }
 }

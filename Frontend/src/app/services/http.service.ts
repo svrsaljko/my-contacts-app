@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { IContact } from '../interfaces/icontact';
 import { IPatchBookmarkedReqBody } from '../interfaces/ipatch-bookmarked-req-body';
+import { IReqBodyContact } from '../interfaces/ireq-body-contact';
 
 const CONTACTS_API_URL = 'http://localhost:50703/api/contact';
 
@@ -38,5 +39,12 @@ export class HttpService {
 
   patchBookmarked(reqBody: IPatchBookmarkedReqBody) {
     return this.http.patch<IContact>(CONTACTS_API_URL, reqBody, httpOptions);
+  }
+  updateContact(reqBody: IReqBodyContact) {
+    return this.http.put(CONTACTS_API_URL, reqBody, httpOptions);
+  }
+
+  deleteContact(id: number) {
+    return this.http.delete(`${CONTACTS_API_URL}/${id}`);
   }
 }
