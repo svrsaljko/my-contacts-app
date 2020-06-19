@@ -8,11 +8,12 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+
 namespace Backend.Controllers
 {
     [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ContactController : ApiController
-        {
+    {
         private readonly BackendModel entities = new BackendModel();
         private readonly IMapper imapper = new AutoMapperConfig().Configure();
 
@@ -154,7 +155,7 @@ namespace Backend.Controllers
             IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
             IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
 
-        
+
             entities.ContactEmail.RemoveRange(entities.ContactEmail.Where(ce => ce.ContactId == id));
             entities.ContactNumber.RemoveRange(entities.ContactNumber.Where(cn => cn.ContactId == id));
 

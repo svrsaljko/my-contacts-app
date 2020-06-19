@@ -3,11 +3,14 @@ namespace Backend.DB_Context
     using Backend.DB_Models;
     using System.Data.Entity;
 
+
+
     public partial class BackendModel : DbContext
     {
         public BackendModel()
             : base("name=BackendModel")
         {
+            Database.SetInitializer(new BackendDBInitializer());
         }
 
         public virtual DbSet<Contact> Contact { get; set; }
@@ -27,4 +30,9 @@ namespace Backend.DB_Context
                 .WillCascadeOnDelete(true);
         }
     }
+
+
+
+
+
 }

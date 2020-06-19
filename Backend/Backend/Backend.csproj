@@ -140,9 +140,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\CreateDBIfNotExist.cs" />
     <Compile Include="Configuration\AutoMapperConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="DB_Context\BackendDBInitializer.cs" />
     <Compile Include="DB_Context\BackendModel.cs" />
     <Compile Include="DB_Models\Contact.cs" />
     <Compile Include="DB_Models\ContactEmail.cs" />

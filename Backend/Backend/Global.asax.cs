@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using Backend.App_Start;
+using System.Web.Http;
 
 
 namespace Backend
@@ -7,7 +8,7 @@ namespace Backend
     {
         protected void Application_Start()
         {
-
+            CreateDBIfNotExist.InitializeDB();
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
 
