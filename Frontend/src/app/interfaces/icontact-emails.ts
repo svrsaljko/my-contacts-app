@@ -1,5 +1,5 @@
 export interface IContactEmails {
-  ContactId: number;
+  ContactId?: number;
   Email: string;
-  Id: number;
+  Id?: number;
 }

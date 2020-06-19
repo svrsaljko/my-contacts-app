@@ -1,0 +1,132 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  color: #638fff;
+  padding: 1rem;
+}
+
+input {
+  padding-top: 0.5rem;
+}
+
+button {
+  color: white;
+  background-color: #4ec796;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-style: normal;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+button:hover {
+  background-color: #638fff;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.contact-create-form-component-container {
+  margin-top: 12rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.contact-create-form-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-avatar-and-create-details-container-component {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20rem;
+}
+
+.contact-avatar-and-create-details-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 3rem;
+}
+
+.avatar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.avatarimage {
+  background-color: #e2ffdb;
+  width: 15rem;
+  height: 15rem;
+}
+
+.avatarimage:hover {
+  background-color: #4ec796;
+  cursor: pointer;
+}
+
+.avatarimageactiveMale {
+  width: 15rem;
+  height: 15rem;
+  background-color: #4ec796;
+}
+.avatarimageactiveFemale {
+  width: 15rem;
+  height: 15rem;
+  background-color: #4ec796;
+}
+
+.contact-create-main-details-container {
+  background-color: #e2ffdb;
+}
+
+.contact-create-email-container {
+  margin-right: 3rem;
+}
+.contact-create-number-container {
+}
+
+.message {
+  font-size: 2rem;
+  font-style: bold;
+  color: red;
+  text-align: center;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.email-container {
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  border: 1px solid #4ec796;
+  border-radius: 0.5rem;
+}
+
+.email {
+  padding: 0.3rem;
+}
+
+.email-container:hover {
+  cursor: pointer;
+}

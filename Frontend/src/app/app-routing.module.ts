@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactsListComponent } from './components/contacts-list/contacts-list.component';
 import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
 import { ContactUpdateFormComponent } from './components/contact-update-form/contact-update-form.component';
+import { ContactCreateFormComponent } from './components/contact-create-form/contact-create-form.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
     redirectTo: 'contact/list',
     pathMatch: 'full',
   },
+  { path: 'contact/create', component: ContactCreateFormComponent },
   { path: 'contact/:id', component: ContactDetailsComponent },
   { path: 'contact/update/:id', component: ContactUpdateFormComponent },
 ];

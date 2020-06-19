@@ -17,7 +17,7 @@ import * as ContactActions from '../../actions/contact.action';
 export class ContactManagerBarComponent implements OnInit {
   constructor(private router: Router, private store: Store<IAppState>) {}
 
-  ROUT = 'contact/list';
+  ROUTE = 'contact/list';
 
   faPlusSquare = faPlusSquare;
   faSearch = faSearch;
@@ -27,24 +27,24 @@ export class ContactManagerBarComponent implements OnInit {
   keywordForm = new FormControl('');
 
   onByFirstNameClick = () => {
-    if (this.router.url !== `/${this.ROUT}`) {
-      this.router.navigate([this.ROUT]);
+    if (this.router.url !== `/${this.ROUTE}`) {
+      this.router.navigate([this.ROUTE]);
     }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
     );
   };
   onByLastNameClick = () => {
-    if (this.router.url !== `/${this.ROUT}`) {
-      this.router.navigate([this.ROUT]);
+    if (this.router.url !== `/${this.ROUTE}`) {
+      this.router.navigate([this.ROUTE]);
     }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
     );
   };
   onByTagClick = () => {
-    if (this.router.url !== `/${this.ROUT}`) {
-      this.router.navigate([this.ROUT]);
+    if (this.router.url !== `/${this.ROUTE}`) {
+      this.router.navigate([this.ROUTE]);
     }
     this.store.dispatch(
       new ContactActions.SetAllContactsByPayload(this.keywordForm.value)
@@ -52,12 +52,14 @@ export class ContactManagerBarComponent implements OnInit {
   };
   onGetAllClick = () => {
     console.log('this.router: ', this.router.url);
-    if (this.router.url !== `/${this.ROUT}`) {
-      this.router.navigate([this.ROUT]);
+    if (this.router.url !== `/${this.ROUTE}`) {
+      this.router.navigate([this.ROUTE]);
     }
     this.store.dispatch(new ContactActions.SetAllContacts());
   };
-  onAddNewClick = () => {};
+  onAddNewClick = () => {
+    this.router.navigate(['contact/create']);
+  };
 
   ngOnInit(): void {
     console.log('keyword form:  VALID', this.keywordForm.valid);

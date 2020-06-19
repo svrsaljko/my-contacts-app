@@ -40,16 +40,19 @@ namespace Backend.Controllers
         public IHttpActionResult Post(ReqBodyContact reqBodyContact)
         {
             Contact contact = reqBodyContact.NewContact;
+            IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
+            IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
+
             entities.Contact.Add(contact);
             entities.SaveChanges();
             int contactId = contact.Id;
 
-            foreach (ContactEmail ce in reqBodyContact.NewContactEmails)
+            foreach (ContactEmail ce in contactEmails)
             {
                 ce.ContactId = contactId;
                 entities.ContactEmail.Add(ce);
             }
-            foreach (ContactNumber cn in reqBodyContact.NewContactNumbers)
+            foreach (ContactNumber cn in contactNumbers)
             {
                 cn.ContactId = contactId;
                 entities.ContactNumber.Add(cn);

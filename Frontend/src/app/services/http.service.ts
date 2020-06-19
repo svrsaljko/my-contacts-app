@@ -44,6 +44,10 @@ export class HttpService {
     return this.http.put(CONTACTS_API_URL, reqBody, httpOptions);
   }
 
+  postContact(reqBody: IReqBodyContact) {
+    return this.http.post(CONTACTS_API_URL, reqBody, httpOptions);
+  }
+
   deleteContact(id: number) {
     return this.http.delete(`${CONTACTS_API_URL}/${id}`);
   }

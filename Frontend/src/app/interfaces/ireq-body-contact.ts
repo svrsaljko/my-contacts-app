@@ -7,7 +7,7 @@ export interface IReqBodyContact {
 }
 
 export interface INewContact {
-  Id: number;
+  Id?: number;
   FirstName: string;
   LastName: string;
   ContactAddress: string;

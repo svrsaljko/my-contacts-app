@@ -1,5 +1,5 @@
 export interface IContactNumbers {
-  ContactId: number;
+  ContactId?: number;
   Number: string;
-  Id: number;
+  Id?: number;
 }
