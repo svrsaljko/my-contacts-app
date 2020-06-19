@@ -4,13 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IContact } from '../../interfaces/icontact';
 import { IContactEmails } from '../../interfaces/icontact-emails';
 import { IContactNumbers } from '../../interfaces/icontact-numbers';
+import { IContactTags } from '../../interfaces/icontact-tags';
 import {
   IReqBodyContact,
   INewContact,
 } from '../../interfaces/ireq-body-contact';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from '../../services/http.service';
 
 import { Store, select } from '@ngrx/store';
@@ -45,43 +44,42 @@ export class ContactUpdateFormComponent implements OnInit {
   contactNumbers = [];
   contactFormNumbers = [];
   addingExistingNumberFlags = [];
+  //Tag
+  contactTags = [];
+  contactFormTags = [];
+  addingExistingTagFlags = [];
 
   contactUpdateMainDetailsForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
+      Validators.minLength(1),
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
+      Validators.minLength(1),
+      ,
     ]),
     address: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
+      Validators.minLength(1),
     ]),
-    tag: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
+    tag: new FormControl('', [Validators.required, Validators.minLength(1)]),
   });
 
   contactAddEmailForm = new FormGroup({
     addEmail: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
+      Validators.minLength(1),
     ]),
   });
   contactAddNumberForm = new FormGroup({
     addNumber: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
+      Validators.minLength(1),
     ]),
+  });
+  contactAddTagForm = new FormGroup({
+    addTag: new FormControl('', [Validators.required, Validators.minLength(1)]),
   });
 
   //EMAIL
@@ -198,6 +196,63 @@ export class ContactUpdateFormComponent implements OnInit {
     return contactNumbers;
   };
 
+  //TAG
+
+  addingTagChecker = (i: number): boolean => {
+    if (this.addingExistingTagFlags[i] === true) {
+      if (this.addingExistingTagFlags[i] === true) {
+        if (this.contactTags[i] === null) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    } else {
+      this.addingExistingTagFlags[i] = false;
+      return false;
+    }
+  };
+
+  addTag = (contactTag: string, i: number) => {
+    this.addingExistingTagFlags[i] = true;
+    if (this.contactTags[i] === contactTag) {
+      this.contactTags[i] = null;
+    } else {
+      this.contactTags[i] = contactTag;
+    }
+  };
+
+  addTagFromTagForm() {
+    this.contactFormTags.push(this.contactAddTagForm.value);
+  }
+
+  getContactTags = (): IContactTags[] => {
+    const contactTagsBuffer = [];
+    for (let i = 0; i < this.contactTags.length; i++) {
+      if (this.contactTags[i] != null) {
+        contactTagsBuffer[i] = this.contactTags[i];
+      }
+    }
+    for (let i = 0; i < this.contactFormTags.length; i++) {
+      contactTagsBuffer[this.contactTags.length + i] = this.contactFormTags[
+        i
+      ].addTag;
+    }
+    const contactTagsFilter = contactTagsBuffer.filter(
+      (contactTag) => typeof contactTag === 'string'
+    );
+    let contactTags: IContactTags[] = [];
+
+    for (let i = 0; i < contactTagsFilter.length; i++) {
+      contactTags[i] = {
+        ContactId: this.contactId,
+        Tag: contactTagsFilter[i],
+        Id: null,
+      };
+    }
+    return contactTags;
+  };
+
   //
 
   getUpdatedContact = (gender: string, bookmarked: boolean): INewContact => {
@@ -206,7 +261,6 @@ export class ContactUpdateFormComponent implements OnInit {
       FirstName: this.contactUpdateMainDetailsForm.value.firstName,
       LastName: this.contactUpdateMainDetailsForm.value.lastName,
       ContactAddress: this.contactUpdateMainDetailsForm.value.address,
-      Tag: this.contactUpdateMainDetailsForm.value.tag,
       Gender: gender,
       Bookmarked: bookmarked,
     };
@@ -214,26 +268,28 @@ export class ContactUpdateFormComponent implements OnInit {
   };
 
   submitUpdate = (gender: string, bookmarked: boolean) => {
+    console.log('update:');
     let contactEmails: IContactEmails[] = this.getContactEmails();
     let contactNumbers: IContactNumbers[] = this.getContactNumbers();
-
+    let contactTags: IContactTags[] = this.getContactTags();
     const updatedNewContact = this.getUpdatedContact(gender, bookmarked);
     const updatedContact: IReqBodyContact = {
       NewContact: updatedNewContact,
       NewContactEmails: contactEmails,
       NewContactNumbers: contactNumbers,
+      NewContactTags: contactTags,
     };
 
     console.log('updatedContact: ', updatedContact);
     this.contactService.updateContact(updatedContact).subscribe((data) => {
       console.log('data: ', data);
+      this.router.navigate(['contact/list']);
     });
   };
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.contactId = parseInt(id, 0);
-    //izbrisati, triba selector sredit
     this.store.dispatch(new ContactActions.SetAllContacts());
 
     this.contact$ = this.store.pipe(

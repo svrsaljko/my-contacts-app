@@ -161,43 +161,49 @@ namespace Backend.Controllers
         //    return Ok(contacts);
         //}
 
-        //[HttpPut]
-        //public IHttpActionResult UpdateContact(ReqBodyContact reqBodyContact)
-        //{
+        [HttpPut]
+        public IHttpActionResult UpdateContact(ReqBodyContact reqBodyContact)
+        {
 
-        //    int id = reqBodyContact.NewContact.Id;
-        //    IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
-        //    IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
-
-
-        //    entities.ContactEmail.RemoveRange(entities.ContactEmail.Where(ce => ce.ContactId == id));
-        //    entities.ContactNumber.RemoveRange(entities.ContactNumber.Where(cn => cn.ContactId == id));
+            int id = reqBodyContact.NewContact.Id;
+            IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
+            IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
+            IEnumerable<ContactTag> contactTags = reqBodyContact.NewContactTags;
 
 
-        //    entities.SaveChanges();
+            entities.ContactEmail.RemoveRange(entities.ContactEmail.Where(ce => ce.ContactId == id));
+            entities.ContactNumber.RemoveRange(entities.ContactNumber.Where(cn => cn.ContactId == id));
+            entities.ContactTag.RemoveRange(entities.ContactTag.Where(ct => ct.ContactId == id));
 
-        //    Contact contactUpdate = entities.Contact.FirstOrDefault(c => c.Id == id);
-        //    contactUpdate.FirstName = reqBodyContact.NewContact.FirstName;
-        //    contactUpdate.LastName = reqBodyContact.NewContact.LastName;
-        //    contactUpdate.ContactAddress = reqBodyContact.NewContact.ContactAddress;
-        //    contactUpdate.Tag = reqBodyContact.NewContact.Tag;
-        //    contactUpdate.Gender = reqBodyContact.NewContact.Gender;
-        //    contactUpdate.Bookmarked = reqBodyContact.NewContact.Bookmarked;
 
-        //    foreach (ContactEmail ce in contactEmails)
-        //    {
-        //        entities.ContactEmail.Add(ce);
-        //    }
-        //    foreach (ContactNumber cn in contactNumbers)
-        //    {
-        //        entities.ContactNumber.Add(cn);
-        //    }
+            entities.SaveChanges();
 
-        //    entities.SaveChanges();
+            Contact contactUpdate = entities.Contact.FirstOrDefault(c => c.Id == id);
+            contactUpdate.FirstName = reqBodyContact.NewContact.FirstName;
+            contactUpdate.LastName = reqBodyContact.NewContact.LastName;
+            contactUpdate.ContactAddress = reqBodyContact.NewContact.ContactAddress;
+            contactUpdate.Gender = reqBodyContact.NewContact.Gender;
+            contactUpdate.Bookmarked = reqBodyContact.NewContact.Bookmarked;
 
-        //    return Ok();
+            foreach (ContactEmail ce in contactEmails)
+            {
+                entities.ContactEmail.Add(ce);
+            }
+            foreach (ContactNumber cn in contactNumbers)
+            {
+                entities.ContactNumber.Add(cn);
+            }
 
-        //}
+            foreach (ContactTag ct in contactTags)
+            {
+                entities.ContactTag.Add(ct);
+            }
+
+            entities.SaveChanges();
+
+            return Ok();
+
+        }
 
         //[HttpPatch]
         //public IHttpActionResult PatchBookmarked([FromBody] ReqBodyBookmarkedContact reqBodyBookmarkedContact)

@@ -49,16 +49,9 @@
               [ngModel]="contact.ContactAddress"
             />
           </label>
-          <label>
-            Tag:
-            <input type="text" formControlName="tag" [ngModel]="contact.Tag" />
-          </label>
         </form>
         <div class="button-container">
-          <button
-            [disabled]="!contactUpdateMainDetailsForm.valid"
-            (click)="submitUpdate(contact.Gender, contact.Bookmarked)"
-          >
+          <button (click)="submitUpdate(contact.Gender, contact.Bookmarked)">
             UPDATE CONTACT
           </button>
         </div>
@@ -171,6 +164,64 @@
           }"
         >
           {{ contactNumber.addNumber }}
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-update-number-container">
+      <form [formGroup]="contactAddTagForm">
+        <label>
+          Add new contact tag:
+          <input
+            type="text"
+            formControlName="addTag"
+            placeholder="Enter new tag here ..."
+          />
+        </label>
+      </form>
+      <div class="button-container">
+        <button (click)="addTagFromTagForm()">
+          ADD TAG
+        </button>
+      </div>
+      <div class="message-container">
+        <div class="message">
+          Click on tag you want to keep!
+        </div>
+      </div>
+
+      <div
+        class="email-container"
+        *ngFor="let contactTag of contact.ContactTags; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: addingTagChecker(i) ? '#638fff' : '#5affe1',
+            color: addingTagChecker(i) ? 'white' : '#638fff'
+          }"
+          (click)="addTag(contactTag.Tag, i)"
+        >
+          {{ contactTag.Tag }}
+        </div>
+      </div>
+      <div class="message-container">
+        <div class="message">
+          New tags added:
+        </div>
+      </div>
+      <div
+        class="email-container"
+        *ngFor="let contactTag of contactFormTags; let i = index"
+      >
+        <div
+          class="email"
+          [ngStyle]="{
+            backgroundColor: '#638fff',
+            color: 'white'
+          }"
+        >
+          {{ contactTag.addTag }}
         </div>
       </div>
     </div>

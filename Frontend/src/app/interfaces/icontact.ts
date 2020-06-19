@@ -9,7 +9,7 @@ export interface IContact {
   ContactAddress: string;
   Gender: string;
   Bookmarked: boolean;
-  Tag: IContactTags[];
+  ContactTags: IContactTags[];
   ContactEmails: IContactEmails[];
   ContactNumbers: IContactNumbers[];
 }

@@ -11,7 +11,7 @@ import {
 
 import { HttpService } from '../../services/http.service';
 
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-create-form',
@@ -33,14 +33,20 @@ export class ContactCreateFormComponent implements OnInit {
   });
 
   contactAddEmailForm = new FormGroup({
-    addEmail: new FormControl(''),
+    addEmail: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
   });
   contactAddNumberForm = new FormGroup({
-    addNumber: new FormControl(''),
+    addNumber: new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+    ]),
   });
 
   contactAddTagForm = new FormGroup({
-    addTag: new FormControl(''),
+    addTag: new FormControl('', [Validators.required, Validators.minLength(1)]),
   });
 
   onMaleAvatarClick = () => {
