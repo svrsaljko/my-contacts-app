@@ -76,30 +76,33 @@ namespace Backend.Controllers
             return Ok();
         }
 
-        //[HttpDelete]
-        //public IHttpActionResult Delete(int id)
-        //{
-        //    if (id <= 0)
-        //        return BadRequest("Not a valid Contact id");
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            if (id <= 0)
+                return BadRequest("Not a valid Contact id");
 
-        //    Contact contact = entities.Contact.Where(c => c.Id == id).FirstOrDefault();
-        //    if (contact == null)
-        //    {
-        //        return BadRequest("Contact doesn't exist");
-        //    }
+            Contact contact = entities.Contact.Where(c => c.Id == id).FirstOrDefault();
+            if (contact == null)
+            {
+                return BadRequest("Contact doesn't exist");
+            }
 
-        //    ContactEmail contactEmail = entities.ContactEmail.Where(c => c.ContactId == id).FirstOrDefault();
-        //    ContactNumber contactNumber = entities.ContactNumber.Where(c => c.ContactId == id).FirstOrDefault();
-
-        //    entities.ContactEmail.Remove(contactEmail);
-        //    entities.ContactNumber.Remove(contactNumber);
-        //    entities.Contact.Remove(contact);
-
-        //    entities.SaveChanges();
+            ContactEmail contactEmail = entities.ContactEmail.Where(c => c.ContactId == id).FirstOrDefault();
+            ContactNumber contactNumber = entities.ContactNumber.Where(c => c.ContactId == id).FirstOrDefault();
+            ContactTag contactTag = entities.ContactTag.Where(c => c.ContactId == id).FirstOrDefault();
 
 
-        //    return Ok("Contact successfully deleted!");
-        //}
+            entities.ContactEmail.Remove(contactEmail);
+            entities.ContactNumber.Remove(contactNumber);
+            entities.ContactTag.Remove(contactTag);
+            entities.Contact.Remove(contact);
+
+            entities.SaveChanges();
+
+
+            return Ok("Contact successfully deleted!");
+        }
 
         //public IHttpActionResult GetByFirstName(string firstName)
         //{
@@ -205,19 +208,19 @@ namespace Backend.Controllers
 
         }
 
-        //[HttpPatch]
-        //public IHttpActionResult PatchBookmarked([FromBody] ReqBodyBookmarkedContact reqBodyBookmarkedContact)
-        //{
+        [HttpPatch]
+        public IHttpActionResult PatchBookmarked([FromBody] ReqBodyBookmarkedContact reqBodyBookmarkedContact)
+        {
 
-        //    int id = reqBodyBookmarkedContact.Id;
-        //    bool bookmarked = reqBodyBookmarkedContact.Bookmarked;
-        //    Contact contact = entities.Contact.FirstOrDefault(c => c.Id == id);
-        //    contact.Bookmarked = bookmarked;
+            int id = reqBodyBookmarkedContact.Id;
+            bool bookmarked = reqBodyBookmarkedContact.Bookmarked;
+            Contact contact = entities.Contact.FirstOrDefault(c => c.Id == id);
+            contact.Bookmarked = bookmarked;
 
-        //    entities.SaveChanges();
+            entities.SaveChanges();
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
     }
 
 }

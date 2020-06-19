@@ -78,9 +78,11 @@
       <p class="main-details-container-property">
         Tag:
       </p>
-      <p class="main-details-container-property-value">
-        {{ contact.Tag }}
-      </p>
+      <div *ngFor="let tag of contact.ContactTags">
+        <p class="main-details-container-property-value">
+          {{ tag.Tag }}
+        </p>
+      </div>
 
       <p class="main-details-container-property">
         Email:
