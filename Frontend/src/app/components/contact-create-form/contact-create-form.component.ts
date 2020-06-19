@@ -1,24 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { IContact } from '../../interfaces/icontact';
 import { IContactEmails } from '../../interfaces/icontact-emails';
 import { IContactNumbers } from '../../interfaces/icontact-numbers';
+import { IContactTags } from '../../interfaces/icontact-tags';
 import {
   IReqBodyContact,
   INewContact,
 } from '../../interfaces/ireq-body-contact';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+
 import { HttpService } from '../../services/http.service';
 
-import { Store, select } from '@ngrx/store';
-import * as ContactReducers from '../../reducers/contact.reducer';
-import * as ContactActions from '../../actions/contact.action';
-import { IAppState } from '../../iapp.state';
-import { Observable } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-create-form',
@@ -26,48 +19,28 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./contact-create-form.component.css'],
 })
 export class ContactCreateFormComponent implements OnInit {
-  constructor(private contactService: HttpService) {}
+  constructor(private contactService: HttpService, private router: Router) {}
 
   gender = '';
   contactFormEmails = [];
   contactFormNumbers = [];
+  contactFormTags = [];
 
   contactCreateMainDetailsForm = new FormGroup({
-    firstName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    lastName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    address: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    tag: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    address: new FormControl(''),
   });
 
   contactAddEmailForm = new FormGroup({
-    addEmail: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
+    addEmail: new FormControl(''),
   });
   contactAddNumberForm = new FormGroup({
-    addNumber: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
+    addNumber: new FormControl(''),
+  });
+
+  contactAddTagForm = new FormGroup({
+    addTag: new FormControl(''),
   });
 
   onMaleAvatarClick = () => {
@@ -110,6 +83,21 @@ export class ContactCreateFormComponent implements OnInit {
     return contactEmails;
   };
 
+  addTagFromTagForm() {
+    this.contactFormTags.push(this.contactAddTagForm.value);
+  }
+
+  getContactTags = (): IContactTags[] => {
+    let contactTags: IContactTags[] = [];
+
+    for (let i = 0; i < this.contactFormTags.length; i++) {
+      contactTags[i] = {
+        Tag: this.contactFormTags[i].addTag,
+      };
+    }
+    return contactTags;
+  };
+
   addNumberFromNumberForm() {
     this.contactFormNumbers.push(this.contactAddNumberForm.value);
   }
@@ -130,7 +118,6 @@ export class ContactCreateFormComponent implements OnInit {
       FirstName: this.contactCreateMainDetailsForm.value.firstName,
       LastName: this.contactCreateMainDetailsForm.value.lastName,
       ContactAddress: this.contactCreateMainDetailsForm.value.address,
-      Tag: this.contactCreateMainDetailsForm.value.tag,
       Gender: this.gender,
       Bookmarked: false,
     };
@@ -141,17 +128,18 @@ export class ContactCreateFormComponent implements OnInit {
     console.log('create called');
     let contactEmails: IContactEmails[] = this.getContactEmails();
     let contactNumbers: IContactNumbers[] = this.getContactNumbers();
+    let contactTags: IContactTags[] = this.getContactTags();
 
     const contact = this.getNewContact();
     const newContact: IReqBodyContact = {
       NewContact: contact,
       NewContactEmails: contactEmails,
       NewContactNumbers: contactNumbers,
+      NewContactTags: contactTags,
     };
 
-    console.log('updatedContact: ', newContact);
     this.contactService.postContact(newContact).subscribe((data) => {
-      console.log('data: ', data);
+      this.router.navigate(['contact/list']);
     });
   };
 

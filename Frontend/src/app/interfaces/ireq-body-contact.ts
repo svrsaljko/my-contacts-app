@@ -1,9 +1,11 @@
 import { IContactEmails } from '../interfaces/icontact-emails';
 import { IContactNumbers } from '../interfaces/icontact-numbers';
+import { IContactTags } from '../interfaces/icontact-tags';
 export interface IReqBodyContact {
   NewContact: INewContact;
   NewContactEmails: IContactEmails[];
   NewContactNumbers: IContactNumbers[];
+  NewContactTags: IContactTags[];
 }
 
 export interface INewContact {
@@ -11,7 +13,6 @@ export interface INewContact {
   FirstName: string;
   LastName: string;
   ContactAddress: string;
-  Tag: string;
   Gender: string;
   Bookmarked: boolean;
 }

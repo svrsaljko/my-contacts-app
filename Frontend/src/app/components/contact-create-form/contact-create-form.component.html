@@ -30,11 +30,6 @@
           Address:
           <input type="text" formControlName="address" />
         </label>
-
-        <label>
-          Tag:
-          <input type="text" formControlName="tag" />
-        </label>
       </form>
       <div class="button-container">
         <button
@@ -59,11 +54,6 @@
     </form>
     <div class="button-container">
       <button (click)="addEmailFromEmailForm()">ADD EMAIL</button>
-    </div>
-    <div class="message-container">
-      <div class="message">
-        Click on email you want to keep!
-      </div>
     </div>
 
     <div class="message">
@@ -101,11 +91,6 @@
         ADD NUMBER
       </button>
     </div>
-    <div class="message-container">
-      <div class="message">
-        Click on number you want to keep!
-      </div>
-    </div>
 
     <div class="message-container">
       <div class="message">
@@ -124,6 +109,44 @@
         }"
       >
         {{ contactNumber.addNumber }}
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-create-number-container">
+    <form [formGroup]="contactAddTagForm">
+      <label>
+        Add new contact tag:
+        <input
+          type="text"
+          formControlName="addTag"
+          placeholder="Enter new tag here ..."
+        />
+      </label>
+    </form>
+    <div class="button-container">
+      <button (click)="addTagFromTagForm()">
+        ADD TAG
+      </button>
+    </div>
+
+    <div class="message-container">
+      <div class="message">
+        New tags added:
+      </div>
+    </div>
+    <div
+      class="email-container"
+      *ngFor="let contactTag of contactFormTags; let i = index"
+    >
+      <div
+        class="email"
+        [ngStyle]="{
+          backgroundColor: '#638fff',
+          color: 'white'
+        }"
+      >
+        {{ contactTag.addTag }}
       </div>
     </div>
   </div>

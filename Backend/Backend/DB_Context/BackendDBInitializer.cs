@@ -24,7 +24,7 @@ namespace Backend.DB_Context
                 FirstName = "Stipe",
                 LastName = "Stipic",
                 ContactAddress = "Adresa init",
-            
+
                 Gender = "Male",
                 Bookmarked = true
             });
@@ -34,7 +34,7 @@ namespace Backend.DB_Context
                 FirstName = "Mate",
                 LastName = "Matic",
                 ContactAddress = "Adresa init",
-             
+
                 Gender = "Male",
                 Bookmarked = false
             });

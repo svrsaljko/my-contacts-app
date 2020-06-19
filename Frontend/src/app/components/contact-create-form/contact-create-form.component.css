@@ -23,8 +23,8 @@ button {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   font-style: normal;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 8rem;
+  padding-right: 8rem;
 }
 
 button:hover {
@@ -39,7 +39,6 @@ button:hover {
 }
 
 .contact-create-form-component-container {
-  margin-top: 12rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -54,7 +53,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 20rem;
+  margin-top: 10rem;
 }
 
 .contact-avatar-and-create-details-container {
@@ -99,6 +98,7 @@ button:hover {
   margin-right: 3rem;
 }
 .contact-create-number-container {
+  margin-right: 3rem;
 }
 
 .message {

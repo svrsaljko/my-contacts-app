@@ -1,7 +1,7 @@
 namespace Backend.DB_Context
 {
-    using System.Data.Entity;
     using Backend.DB_Models;
+    using System.Data.Entity;
 
     public partial class BackendModel : DbContext
     {
@@ -9,7 +9,7 @@ namespace Backend.DB_Context
             : base("name=BackendModel")
         {
             Database.SetInitializer(new BackendDBInitializer());
-            
+
         }
 
         public virtual DbSet<Contact> Contact { get; set; }
@@ -34,7 +34,7 @@ namespace Backend.DB_Context
                 .WithRequired(e => e.Contact)
                 .WillCascadeOnDelete(true);
 
-           
+
 
 
         }

@@ -34,37 +34,47 @@ namespace Backend.Controllers
                 c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
                 c.ContactNumbers = contactNumbers.Where(cn => cn.ContactId == c.Id);
                 c.ContactTags = contactTags.Where(ct => ct.ContactId == c.Id);
-             }
+            }
 
 
             return Ok(contacts);
         }
 
 
-        //[HttpPost]
-        //public IHttpActionResult Post(ReqBodyContact reqBodyContact)
-        //{
-        //    Contact contact = reqBodyContact.NewContact;
-        //    IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
-        //    IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
+        [HttpPost]
+        public IHttpActionResult Post(ReqBodyContact reqBodyContact)
+        {
+            Contact contact = reqBodyContact.NewContact;
+            IEnumerable<ContactEmail> contactEmails = reqBodyContact.NewContactEmails;
+            IEnumerable<ContactNumber> contactNumbers = reqBodyContact.NewContactNumbers;
+            IEnumerable<ContactTag> contactTags = reqBodyContact.NewContactTags;
 
-        //    entities.Contact.Add(contact);
-        //    entities.SaveChanges();
-        //    int contactId = contact.Id;
 
-        //    foreach (ContactEmail ce in contactEmails)
-        //    {
-        //        ce.ContactId = contactId;
-        //        entities.ContactEmail.Add(ce);
-        //    }
-        //    foreach (ContactNumber cn in contactNumbers)
-        //    {
-        //        cn.ContactId = contactId;
-        //        entities.ContactNumber.Add(cn);
-        //    }
-        //    entities.SaveChanges();
-        //    return Ok();
-        //}
+            entities.Contact.Add(contact);
+            entities.SaveChanges();
+            int contactId = contact.Id;
+
+            foreach (ContactEmail ce in contactEmails)
+            {
+                ce.ContactId = contactId;
+                entities.ContactEmail.Add(ce);
+            }
+            foreach (ContactNumber cn in contactNumbers)
+            {
+                cn.ContactId = contactId;
+                entities.ContactNumber.Add(cn);
+            }
+
+            foreach (ContactTag ct in contactTags)
+            {
+                ct.ContactId = contactId;
+                entities.ContactTag.Add(ct);
+            }
+
+
+            entities.SaveChanges();
+            return Ok();
+        }
 
         //[HttpDelete]
         //public IHttpActionResult Delete(int id)
