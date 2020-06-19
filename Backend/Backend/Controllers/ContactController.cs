@@ -152,51 +152,7 @@ namespace Backend.Controllers
         }
 
 
-        public IHttpActionResult GetByTag(string tag)
-        {
-
-            
-
-            IEnumerable<ContactEmailModel> contactEmails = imapper.Map<IEnumerable<ContactEmail>,
-                IEnumerable<ContactEmailModel>>(entities.ContactEmail.ToList());
-            IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>,
-                IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
-
-         
-
-            IEnumerable<ContactTag> contactTags =entities.ContactTag.ToList();
-
-            List<Contact> contactList= new List<Contact>();
-            List<ContactTag> contactTagList = new List<ContactTag>();
-
-
-            foreach (ContactTag ct in contactTags)
-            {
-                if( ct.Tag == tag)
-                {
-                    contactList.Add((Contact)entities.Contact.Where(c => c.Id == ct.ContactId));
-                    contactTagList.Add(ct);
-                }
-               
-            }
-
-            IEnumerable<ContactTagModel> contactTagsModel = imapper.Map<IEnumerable<ContactTag>,
-                IEnumerable<ContactTagModel>>(contactTagList);
-
-            List<Contact> contactsListDistinct = contactList.Distinct().ToList();
-            IEnumerable<ContactModel> contacts = imapper.Map<List< Contact >,
-                IEnumerable<ContactModel>>(contactsListDistinct.ToList() );
-
-
-            foreach (ContactModel c in contacts)
-            {
-                c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
-                c.ContactNumbers = contactNumbers.Where(ce => ce.ContactId == c.Id);
-                c.ContactTags = contactTagsModel.Where(ct => ct.ContactId == c.Id);
-            }
-
-            return Ok(contacts);
-        }
+        
 
         [HttpPut]
         public IHttpActionResult UpdateContact(ReqBodyContact reqBodyContact)
