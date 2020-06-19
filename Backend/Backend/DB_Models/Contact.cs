@@ -12,6 +12,7 @@ namespace Backend.DB_Models
         {
             ContactEmail = new HashSet<ContactEmail>();
             ContactNumber = new HashSet<ContactNumber>();
+            ContactTag = new HashSet<ContactTag>();
         }
 
         public int Id { get; set; }
@@ -30,10 +31,6 @@ namespace Backend.DB_Models
 
         [Required]
         [StringLength(50)]
-        public string Tag { get; set; }
-
-        [Required]
-        [StringLength(50)]
         public string Gender { get; set; }
 
         public bool Bookmarked { get; set; }
@@ -44,6 +41,7 @@ namespace Backend.DB_Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContactNumber> ContactNumber { get; set; }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ContactTag> ContactTag { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Backend.App_Start
             using (var context = new BackendModel())
             {
                 new BackendDBInitializer().InitializeDatabase(context);
-                   
+
             }
         }
     }

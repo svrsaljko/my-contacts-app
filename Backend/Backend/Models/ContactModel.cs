@@ -13,8 +13,6 @@
 
         public string ContactAddress { get; set; }
 
-        public string Tag { get; set; }
-
         public string Gender { get; set; }
 
         public bool Bookmarked { get; set; }
@@ -22,6 +20,8 @@
         public IEnumerable<ContactEmailModel> ContactEmails { get; set; }
 
         public IEnumerable<ContactNumberModel> ContactNumbers { get; set; }
+
+        public IEnumerable<ContactTagModel> ContactTags { get; set; }
 
     }
 

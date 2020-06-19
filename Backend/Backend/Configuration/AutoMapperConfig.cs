@@ -14,6 +14,8 @@ namespace Backend.Configuration
                 cfg.CreateMap<Contact, ContactModel>();
                 cfg.CreateMap<ContactEmail, ContactEmailModel>();
                 cfg.CreateMap<ContactNumber, ContactNumberModel>();
+                cfg.CreateMap<ContactTag, ContactTagModel>();
+
 
             });
 

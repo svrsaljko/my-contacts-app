@@ -1,7 +1,6 @@
 ﻿using Backend.App_Start;
 using System.Web.Http;
 
-
 namespace Backend
 {
     public class WebApiApplication : System.Web.HttpApplication
@@ -10,7 +9,6 @@ namespace Backend
         {
             CreateDBIfNotExist.InitializeDB();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-
 
         }
     }

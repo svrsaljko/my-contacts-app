@@ -12,6 +12,7 @@ namespace Backend.DB_Context
         List<Contact> contacts = new List<Contact>();
         List<ContactEmail> contactEmails = new List<ContactEmail>();
         List<ContactNumber> contactNumbers = new List<ContactNumber>();
+        List<ContactTag> contactTags = new List<ContactTag>();
 
 
         public BackendDBInitializer()
@@ -23,7 +24,7 @@ namespace Backend.DB_Context
                 FirstName = "Stipe",
                 LastName = "Stipic",
                 ContactAddress = "Adresa init",
-                Tag = "Friend",
+            
                 Gender = "Male",
                 Bookmarked = true
             });
@@ -33,7 +34,7 @@ namespace Backend.DB_Context
                 FirstName = "Mate",
                 LastName = "Matic",
                 ContactAddress = "Adresa init",
-                Tag = "Cousin",
+             
                 Gender = "Male",
                 Bookmarked = false
             });
@@ -85,6 +86,28 @@ namespace Backend.DB_Context
                 ContactId = 2
             });
 
+            //TAG
+            contactTags.Add(new ContactTag
+            {
+                Tag = "Friend",
+                ContactId = 1
+            });
+            contactTags.Add(new ContactTag
+            {
+                Tag = "Family",
+                ContactId = 1
+            });
+
+            contactTags.Add(new ContactTag
+            {
+                Tag = "Bussiness",
+                ContactId = 2
+            });
+            contactTags.Add(new ContactTag
+            {
+                Tag = "Cousin",
+                ContactId = 2
+            });
 
         }
 
@@ -101,6 +124,10 @@ namespace Backend.DB_Context
             foreach (ContactNumber cn in contactNumbers)
             {
                 context.ContactNumber.Add(cn);
+            }
+            foreach (ContactTag ct in contactTags)
+            {
+                context.ContactTag.Add(ct);
             }
             context.SaveChanges();
             base.Seed(context);
