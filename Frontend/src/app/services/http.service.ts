@@ -6,7 +6,7 @@ import { IContact } from '../interfaces/icontact';
 import { IPatchBookmarkedReqBody } from '../interfaces/ipatch-bookmarked-req-body';
 import { IReqBodyContact } from '../interfaces/ireq-body-contact';
 
-const CONTACTS_API_URL = 'http://localhost:50703/api/contact';
+const CONTACTS_API_URL = 'http://localhost:56674/api/contact';
 
 const httpOptions = {
   headers: new HttpHeaders({

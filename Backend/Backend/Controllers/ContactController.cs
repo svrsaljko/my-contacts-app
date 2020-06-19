@@ -26,11 +26,15 @@ namespace Backend.Controllers
             IEnumerable<ContactNumberModel> contactNumbers = imapper.Map<IEnumerable<ContactNumber>,
                 IEnumerable<ContactNumberModel>>(entities.ContactNumber.ToList());
 
+            IEnumerable<ContactTagModel> contactTags = imapper.Map<IEnumerable<ContactTag>,
+                IEnumerable<ContactTagModel>>(entities.ContactTag.ToList());
+
             foreach (ContactModel c in contacts)
             {
                 c.ContactEmails = contactEmails.Where(ce => ce.ContactId == c.Id);
                 c.ContactNumbers = contactNumbers.Where(cn => cn.ContactId == c.Id);
-            }
+                c.ContactTags = contactTags.Where(ct => ct.ContactId == c.Id);
+             }
 
 
             return Ok(contacts);
@@ -183,7 +187,7 @@ namespace Backend.Controllers
 
         //    return Ok();
 
-        }
+        //}
 
         //[HttpPatch]
         //public IHttpActionResult PatchBookmarked([FromBody] ReqBodyBookmarkedContact reqBodyBookmarkedContact)

@@ -1,14 +1,15 @@
 import { IContactEmails } from './icontact-emails';
 import { IContactNumbers } from './icontact-numbers';
+import { IContactTags } from './icontact-tags';
 
 export interface IContact {
   Id: number;
   FirstName: string;
   LastName: string;
   ContactAddress: string;
-  Tag: string;
   Gender: string;
   Bookmarked: boolean;
+  Tag: IContactTags[];
   ContactEmails: IContactEmails[];
   ContactNumbers: IContactNumbers[];
 }
