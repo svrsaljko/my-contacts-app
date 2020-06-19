@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -22,6 +23,7 @@ export class ContactManagerBarComponent implements OnInit {
   faPlusSquare = faPlusSquare;
   faSearch = faSearch;
   faUser = faUser;
+  faStar = faStar;
   hover: boolean;
 
   keywordForm = new FormControl('');

@@ -9,6 +9,12 @@
       GET ALL
       <fa-icon [icon]="faUser" size="1x"></fa-icon>
     </button>
+
+    <button class="button">
+      FAVOURITES
+      <fa-icon [icon]="faStar" size="1x"></fa-icon>
+    </button>
+
     <button (click)="onByFirstNameClick()" class="button">
       BY FIRST NAME
       <fa-icon
@@ -42,6 +48,10 @@
         }"
       ></fa-icon>
     </button>
-    <input type="text" [formControl]="keywordForm" />
+    <input
+      type="text"
+      [formControl]="keywordForm"
+      placeholder="Enter keyword ..."
+    />
   </div>
 </div>
