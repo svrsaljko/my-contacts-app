@@ -15,3 +15,5 @@
 ### create a new one ...
 
 <img src='./readmeImages/my-contacts-app4.png' alt='my-contacts-app' >
+
+### Search by favourites and tags coming soon !
